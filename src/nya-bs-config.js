@@ -56,7 +56,10 @@ nyaBsSelect.provider('nyaBsConfig', function() {
     if(!localizedText) {
       localizedText = defaultText['en-us'];
     }
-    return localizedText;
+    return {
+      localizedText: localizedText,
+      allLocalizedTexts: interfaceText
+    };
   }];
 
 });

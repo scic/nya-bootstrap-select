@@ -13,7 +13,12 @@ angular.module('demoApp', ['nya.bootstrap.select'])
       numberItemSelectedTpl: '<strong>%d items selected</strong>'
     });
   })
-  .controller('MainCtrl', function($scope){
+  .controller('MainCtrl', function($scope, nyaBsSelect){
+
+    $scope.changeLanguage = function() {
+      console.log('changing');
+      nyaBsSelect.useLocale('zh-cn');
+    };
 
     $scope.options1 = [
       'Alpha',

@@ -288,7 +288,7 @@ module.exports = function(grunt) {
   // Build distribution files
   grunt.registerTask('build', [
     'less:main',
-    'test',
+//     'test',
     'concat:dist',
     'remove-logging:dist',
     'uglify:dist',

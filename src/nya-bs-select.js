@@ -1,4 +1,18 @@
-nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsConfig', function ($parse, $document, $timeout, nyaBsConfig) {
+nyaBsSelect.factory('nyaBsSelect', ['nyaBsConfig','$rootScope', function(nyaBsConfig, $rootScope) {
+  var locale = null;
+  return {
+    useLocale: function(localeId) {
+      locale = localeId;
+    },
+    getLocalizedText: function() {
+      if(!locale) {
+        return nyaBsConfig.localizedText;
+      }
+      return nyaBsConfig.allLocalizedTexts[locale];
+    }
+  };
+}]);
+nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', '$compile', 'nyaBsSelect', function ($parse, $document, $timeout,$compile, nyaBsSelect) {
 
   var DEFAULT_NONE_SELECTION = 'Nothing selected';
 
@@ -68,7 +82,7 @@ nyaBsSelect.directive('nyaBsSelect', ['$parse', '$document', '$timeout', 'nyaBsC
         length,
         index,
         liElement,
-        localizedText = nyaBsConfig,
+        localizedText = nyaBsSelect.getLocalizedText(),
         isMultiple = typeof tAttrs.multiple !== 'undefined';
 
       classList = getClassList(tElement[0]);
